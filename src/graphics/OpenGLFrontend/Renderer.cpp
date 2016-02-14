@@ -1,5 +1,8 @@
 #include "graphics/OpenGLFrontend.h"
 
+#include "Shader.h"
+#include "ShaderProgram.h"
+
 void OpenGLFrontend::display(Simulation &simulation) {
     glfwPollEvents();
 
@@ -9,7 +12,6 @@ void OpenGLFrontend::display(Simulation &simulation) {
             0.0f,  0.5f, 0.0f
     };
 
-    int width, height;
     glfwGetFramebufferSize(window, &width, &height);
     glViewport(0, 0, width, height);
 
@@ -20,6 +22,12 @@ void OpenGLFrontend::display(Simulation &simulation) {
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    Shader vertexShader("src/graphics/OpenGLFrontend/shaders/simple.vert", GL_VERTEX_SHADER);
+    Shader fragmetShader("src/graphics/OpenGLFrontend/shaders/simple.frag", GL_FRAGMENT_SHADER);
+    ShaderProgram prog {vertexShader, fragmetShader};
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 
     // Swap the screen buffers
     glfwSwapBuffers(window);

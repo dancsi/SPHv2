@@ -37,7 +37,7 @@ set(SOURCE_FILES
     src/Simulation.h
     src/Wall.h
     src/SimulationParameters.h
-    src/SimulationParameters.cpp)
+    src/SimulationParameters.cpp src/graphics/OpenGLFrontend/Shader.h src/graphics/OpenGLFrontend/ShaderProgram.h)
 
 set(EXTERNAL_SOURCES
     external/glad/glad.c)
